@@ -1,0 +1,36 @@
+class Solution {
+    void dfs(int src, unordered_map<int,vector<int>>&adj,vector<bool>&visited){
+       visited[curr] = true; //mark current as visited
+        for(auto i:adj[curr])
+            if(visited[i]==false)
+                dfs(visited,src,adj);
+    }
+public:
+    int makeConnected(int n, vector<vector<int>>& connections) {
+        vector<bool>visited(n,false);
+        unodered_map<int,vector<int>adj>;
+        //step1 make adj list
+        for(int i=0;i<connections.size();++i)
+        {
+            //adding edges
+            adj[connections[i][0]].push_bak(connections[i][1]);
+             adj[connections[i][1]].push_bak(connections[i][0]);
+            edges+=1;   //keep count of edges
+        }
+        //find no of components
+        int components=0;
+        for(int i=0;i<n;i++)
+            if(visited[i]==false){
+                components+=1;
+                dfs(adj,i,visited);
+            }
+        //count no of edges
+        if(edges<n-1)
+            return -1;
+        
+        int redundant = edges-((n-1)-(components-1));
+        if(redundant >= (component-1))
+            return component-1;
+        return -1;
+    }
+};
